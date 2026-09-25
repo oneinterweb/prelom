@@ -3,6 +3,8 @@ main:
     url: /
   - title: "Поучения"
     url: /category/pouchenie/
+  - title: "Събития"
+    url: /събития/
   - title: "Линкове"
     children:
       - title: "YouTube"
