@@ -18,16 +18,19 @@
         {%- elsif tcount >= 4 -%}
           {%- assign tile_span = 2 -%}
         {%- endif -%}
+        {%- assign tlabel = tname | replace: '-', ' ' -%}
         <a
           class="hero-puzzle__piece"
           href="{{ tname | prepend: '/tag/' | append: '/' | relative_url }}"
           rel="tag"
-          title="{{ tname | replace: '-', ' ' }} · {{ tcount }}"
-          style="grid-column: span {{ tile_span }}; grid-row: span {{ tile_span }};"
+          title="{{ tlabel }} · {{ tcount }}"
+          data-span="{{ tile_span }}"
+          data-tag="{{ tlabel | escape }}"
+          style="grid-column: span {{ tile_span }}; grid-row: span {{ tile_span }}; --tag-len: {{ tlabel.size }};"
         >
           <span class="hero-puzzle__inner">
             <span class="hero-puzzle__face hero-puzzle__face--front" aria-hidden="true"></span>
-            <span class="hero-puzzle__face hero-puzzle__face--back">{{ tname | replace: '-', ' ' }}</span>
+            <span class="hero-puzzle__face hero-puzzle__face--back"><span class="hero-puzzle__label">{{ tlabel }}</span></span>
           </span>
         </a>
       {%- endfor -%}

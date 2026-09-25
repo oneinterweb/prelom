@@ -221,8 +221,7 @@
   margin: 0;
   perspective: 800px;
   z-index: 1;
-  outline: 2px solid #c9a227;
-  outline-offset: -2px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.025);
 }
 
 .hero-puzzle__inner {
@@ -248,25 +247,45 @@
 .hero-puzzle__face--back {
   align-items: center;
   background: #c9a227;
+  box-sizing: border-box;
   color: #111318;
+  container-type: size;
   display: flex;
-  font-size: clamp(0.6rem, 1.15vw, 1rem);
   font-weight: 700;
   justify-content: center;
-  line-height: 1.15;
-  padding: 0.25rem;
+  overflow: hidden;
+  padding: 4px;
   text-align: center;
   transform: rotateY(180deg);
+  width: 100%;
+  height: 100%;
+}
+
+.hero-puzzle__label {
+  box-sizing: border-box;
+  display: block;
+  font-size: clamp(6px, min(18cqmin, calc(86cqi / var(--tag-len, 10))), 2rem);
+  line-height: 1.05;
+  max-height: 100%;
+  max-width: 100%;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  overflow-wrap: anywhere;
+  width: 100%;
+  word-break: break-word;
 }
 
 .hero-puzzle__piece:hover,
-.hero-puzzle__piece:focus-visible {
+.hero-puzzle__piece:focus-visible,
+.hero-puzzle__piece.is-flipped {
   z-index: 8;
 }
 
 .hero-puzzle__piece:hover .hero-puzzle__inner,
-.hero-puzzle__piece:focus-visible .hero-puzzle__inner {
-  transform: rotateY(180deg) scale(1.7);
+.hero-puzzle__piece:focus-visible .hero-puzzle__inner,
+.hero-puzzle__piece.is-flipped .hero-puzzle__inner {
+  transform: rotateY(180deg);
 }
 
 .hero-puzzle__piece:focus-visible {
