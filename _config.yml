@@ -53,9 +53,9 @@ feed:
   path: /feed.xml
 
 author:
-  name: "Георги Бакалов"
+  name: "Admin"
   avatar: "/assets/images/logo.jpg"
-  bio: "Основател на Християнски център Прелом."
+  bio: "Християнски център Прелом"
   location: "София, България"
   links:
     - label: "YouTube"

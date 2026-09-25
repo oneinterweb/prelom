@@ -1,5 +1,14 @@
+Admin:
+  name: "Admin"
+  bio: "Християнски център Прелом"
+  avatar: "/assets/images/logo.jpg"
+  links:
+    - label: "YouTube"
+      icon: "fab fa-fw fa-youtube"
+      url: "https://www.youtube.com/@PrelomCenter"
+
 admin:
-  name: "Админ"
+  name: "Admin"
   bio: "Християнски център Прелом"
   avatar: "/assets/images/logo.jpg"
   links:
@@ -8,23 +17,23 @@ admin:
       url: "https://www.youtube.com/@PrelomCenter"
 
 Админ:
-  name: "Админ"
+  name: "Admin"
   bio: "Християнски център Прелом"
   avatar: "/assets/images/logo.jpg"
 
 admin3:
-  name: "Поликсения"
+  name: "Admin"
   bio: "Християнски център Прелом"
   avatar: "/assets/images/logo.jpg"
 
 Поликсения:
-  name: "Поликсения"
+  name: "Admin"
   bio: "Християнски център Прелом"
   avatar: "/assets/images/logo.jpg"
 
 Георги Бакалов:
-  name: "Георги Бакалов"
-  bio: "Основател на Християнски център Прелом."
+  name: "Admin"
+  bio: "Християнски център Прелом"
   avatar: "/assets/images/logo.jpg"
   links:
     - label: "YouTube"
