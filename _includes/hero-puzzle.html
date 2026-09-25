@@ -22,22 +22,6 @@
         {%- assign tcount = site.tags[tname].size -%}
         {%- assign tlabel = tname | replace: '-', ' ' -%}
         {%- assign tlen = tlabel | replace: ' ', '' | size -%}
-        {%- assign word_count = tlabel | split: ' ' | size -%}
-        {%- assign tile_dir = 'h' -%}
-        {%- assign col_span = 1 -%}
-        {%- assign row_span = 1 -%}
-        {%- if word_count > 1 or tlen >= 10 -%}
-          {%- if tlen >= 14 -%}
-            {%- assign col_span = 3 -%}
-          {%- else -%}
-            {%- assign col_span = 2 -%}
-          {%- endif -%}
-        {%- elsif tlen <= 4 -%}
-          {%- assign tile_dir = 'v' -%}
-          {%- assign row_span = 2 -%}
-        {%- elsif tlen >= 7 -%}
-          {%- assign col_span = 2 -%}
-        {%- endif -%}
         <a
           class="hero-puzzle__piece"
           href="{{ tname | prepend: '/tag/' | append: '/' | relative_url }}"
@@ -45,10 +29,7 @@
           title="{{ tlabel }} · {{ tcount }}"
           data-tag="{{ tlabel | escape }}"
           data-count="{{ tcount }}"
-          data-dir="{{ tile_dir }}"
-          data-cols="{{ col_span }}"
-          data-rows="{{ row_span }}"
-          style="grid-column: span {{ col_span }}; grid-row: span {{ row_span }}; --tag-len: {{ tlen }};"
+          style="--tag-len: {{ tlen }};"
         >
           <span class="hero-puzzle__inner">
             <span class="hero-puzzle__face hero-puzzle__face--front" aria-hidden="true"></span>
@@ -63,7 +44,7 @@
     <p class="hero-puzzle__eyebrow">Християнски център Прелом</p>
     <h1 class="hero-puzzle__title">Утре е сега!</h1>
     <p class="hero-puzzle__hint">
-      {{ puzzle_shown }} най-използвани етикета от {{ site.tags.size }} — отварят се като прозорци и се подреждат като пъзел от думи.
+      {{ puzzle_shown }} най-използвани етикета от {{ site.tags.size }} — отварят се едно по едно, докато покрият снимката.
     </p>
   </div>
 </section>
