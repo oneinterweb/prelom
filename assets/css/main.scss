@@ -59,3 +59,353 @@
   height: auto;
   display: block;
 }
+
+.layout--home .masthead,
+.layout--home .page__footer,
+.layout--home .greedy-nav {
+  background: #111318;
+}
+
+.layout--home .greedy-nav a,
+.layout--home .masthead__dropdown-toggle,
+.layout--home .site-title,
+.layout--home .page__footer a,
+.layout--home .page__footer {
+  color: #f4f1ea;
+}
+
+.layout--home {
+  background: #f4f1ea;
+}
+
+.greedy-nav .visible-links {
+  overflow: visible;
+}
+
+.masthead__menu-item--dropdown {
+  position: relative;
+}
+
+.masthead__dropdown-toggle {
+  appearance: none;
+  background: transparent;
+  border: 0;
+  color: inherit;
+  cursor: pointer;
+  display: block;
+  font: inherit;
+  margin: 0 1rem;
+  padding: 0.55rem 0;
+}
+
+.masthead__caret {
+  border-style: solid;
+  border-width: 0.35em 0.28em 0;
+  border-color: currentColor transparent transparent;
+  display: inline-block;
+  margin-inline-start: 0.35em;
+  vertical-align: 0.12em;
+}
+
+.masthead__dropdown {
+  background: #111318;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
+  display: none;
+  list-style: none;
+  margin: 0;
+  min-width: 15rem;
+  padding: 0.4rem 0;
+  position: absolute;
+  inset-inline-end: 0;
+  top: 100%;
+  z-index: 40;
+}
+
+.masthead__dropdown a {
+  color: #f4f1ea !important;
+  margin: 0 !important;
+  padding: 0.55rem 1rem;
+  white-space: nowrap;
+}
+
+.masthead__dropdown a:hover,
+.masthead__dropdown a:focus {
+  background: #c9a227;
+  color: #111318 !important;
+}
+
+.masthead__menu-item--dropdown:hover .masthead__dropdown,
+.masthead__menu-item--dropdown:focus-within .masthead__dropdown,
+.masthead__menu-item--dropdown.is-open .masthead__dropdown {
+  display: block;
+}
+
+.greedy-nav .hidden-links .masthead__dropdown {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  display: block;
+  min-width: 0;
+  position: static;
+}
+
+.greedy-nav .hidden-links .masthead__dropdown a {
+  padding-inline-start: 1.6rem;
+}
+
+.home {
+  color: #1c1a16;
+}
+
+.hero-puzzle {
+  background:
+    radial-gradient(circle at 78% 18%, rgba(201, 162, 39, 0.18), transparent 28%),
+    linear-gradient(180deg, #0d0f14 0%, #171a22 72%, #f4f1ea 100%);
+  color: #f7f3ea;
+  padding: 1.25rem 1.25rem 3rem;
+}
+
+.hero-puzzle__frame {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  aspect-ratio: 16 / 9;
+  background: #fff;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+}
+
+.hero-puzzle__photo {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  pointer-events: none;
+}
+
+.hero-puzzle__board {
+  --puzzle-cols: 26;
+  --puzzle-rows: 16;
+  display: grid;
+  grid-template-columns: repeat(var(--puzzle-cols), 1fr);
+  grid-template-rows: repeat(var(--puzzle-rows), 1fr);
+  position: absolute;
+  inset: 0;
+  width: 100%;
+}
+
+.hero-puzzle__piece {
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  margin: 0;
+  perspective: 700px;
+  z-index: 1;
+}
+
+.hero-puzzle__inner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.38s ease;
+}
+
+.hero-puzzle__face {
+  position: absolute;
+  inset: 1px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.hero-puzzle__face--front {
+  background-repeat: no-repeat;
+}
+
+.hero-puzzle__face--back {
+  align-items: center;
+  background: #111318;
+  color: #f3d789;
+  display: flex;
+  font-size: clamp(0.55rem, 1.1vw, 0.95rem);
+  font-weight: 700;
+  justify-content: center;
+  line-height: 1.15;
+  padding: 0.2rem;
+  text-align: center;
+  transform: rotateY(180deg);
+}
+
+.hero-puzzle__piece.is-flipped {
+  z-index: 8;
+}
+
+.hero-puzzle__piece.is-flipped .hero-puzzle__inner {
+  transform: rotateY(180deg) scale(1.18);
+}
+
+.hero-puzzle__piece:focus-visible {
+  outline: 2px solid #c9a227;
+  outline-offset: 1px;
+}
+
+.hero-puzzle__copy {
+  max-width: 1180px;
+  margin: 1.4rem auto 0;
+}
+
+.hero-puzzle__eyebrow {
+  letter-spacing: 0.14em;
+  margin: 0 0 0.35rem;
+  opacity: 0.72;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+}
+
+.hero-puzzle__title {
+  font-size: clamp(2.1rem, 6vw, 4.2rem);
+  line-height: 1.05;
+  margin: 0 0 0.6rem;
+}
+
+.hero-puzzle__hint {
+  max-width: 42rem;
+  margin: 0;
+  opacity: 0.86;
+}
+
+#main.home-main {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0 1.25rem 4rem;
+  float: none;
+}
+
+.home-latest {
+  margin-top: -1rem;
+}
+
+.home-latest__head {
+  align-items: baseline;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.home-latest__head h2 {
+  margin: 0;
+}
+
+.home-latest__all {
+  color: #7a5b10;
+  font-weight: 700;
+}
+
+.home-latest__grid {
+  display: grid;
+  gap: 1.15rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.home-card {
+  background: #fff;
+  box-shadow: 0 10px 24px rgba(28, 26, 22, 0.08);
+  min-width: 0;
+}
+
+.home-card__link {
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  text-decoration: none;
+}
+
+.home-card__media {
+  aspect-ratio: 16 / 10;
+  background: #d9d3c5;
+  display: block;
+  overflow: hidden;
+}
+
+.home-card__media img {
+  display: block;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
+
+.home-card__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0.9rem 1rem 1.1rem;
+}
+
+.home-card__date {
+  color: #6d675c;
+  font-size: 0.82rem;
+}
+
+.home-card__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.home-card__excerpt {
+  color: #4c473e;
+  font-size: 0.92rem;
+}
+
+.home-cta {
+  background: #111318;
+  color: #f7f3ea;
+  margin-top: 2.5rem;
+  padding: 1.75rem 1.4rem;
+}
+
+.home-cta a {
+  color: #f3d789;
+}
+
+.home-cta h2 {
+  margin-top: 0;
+}
+
+@media (max-width: 860px) {
+  .home-latest__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 560px) {
+  .hero-puzzle {
+    padding-inline: 0.7rem;
+  }
+
+  .home-latest__grid,
+  .home-main {
+    padding-inline: 0;
+  }
+
+  .home-latest__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-puzzle__inner {
+    transition: none;
+  }
+}

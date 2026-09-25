@@ -1,5 +1,5 @@
 ---
-title: "Админ"
+title: "Admin"
 permalink: "/author/admin/"
 layout: "archive-taxonomy"
 taxonomy_type: "author"

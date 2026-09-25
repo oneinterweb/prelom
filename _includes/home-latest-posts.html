@@ -1,0 +1,25 @@
+{% assign latest = site.posts | slice: 0, 9 %}
+<section class="home-latest" aria-labelledby="home-latest-title">
+  <div class="home-latest__head">
+    <h2 id="home-latest-title">Последни публикации</h2>
+    <a class="home-latest__all" href="{{ '/year-archive/' | relative_url }}">Всички</a>
+  </div>
+  <ol class="home-latest__grid">
+    {% for post in latest %}
+      <li class="home-card">
+        <a class="home-card__link" href="{{ post.url | relative_url }}">
+          <span class="home-card__media">
+            {% include post-thumbnail.html post=post %}
+          </span>
+          <span class="home-card__body">
+            <time class="home-card__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d.%m.%Y" }}</time>
+            <span class="home-card__title">{{ post.title | escape }}</span>
+            {% if post.excerpt %}
+              <span class="home-card__excerpt">{{ post.excerpt | markdownify | strip_html | truncate: 140 }}</span>
+            {% endif %}
+          </span>
+        </a>
+      </li>
+    {% endfor %}
+  </ol>
+</section>
