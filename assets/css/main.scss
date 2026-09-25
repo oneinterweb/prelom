@@ -67,7 +67,7 @@
 }
 
 .layout--home .greedy-nav a,
-.layout--home .masthead__dropdown-toggle,
+.layout--home .nav-links__label,
 .layout--home .site-title,
 .layout--home .page__footer a,
 .layout--home .page__footer,
@@ -94,20 +94,18 @@
   overflow: visible;
 }
 
-.masthead__menu-item--dropdown {
+.nav-links {
   position: relative;
+  z-index: 60;
+  flex: 0 0 auto !important;
 }
 
-.masthead__dropdown-toggle {
-  appearance: none;
-  background: transparent;
-  border: 0;
-  color: inherit;
-  cursor: pointer;
+.nav-links__label {
   display: block;
-  font: inherit;
+  cursor: default;
   margin: 0 1rem;
   padding: 0.55rem 0;
+  white-space: nowrap;
 }
 
 .masthead__caret {
@@ -119,51 +117,55 @@
   vertical-align: 0.12em;
 }
 
-.masthead__dropdown {
-  background: #111318;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
-  display: none;
-  list-style: none;
-  margin: 0;
-  min-width: 15rem;
-  padding: 0.4rem 0;
-  position: absolute;
-  inset-inline-end: 0;
+.nav-links__panel {
+  position: absolute !important;
   top: 100%;
-  z-index: 80;
+  right: 0;
+  left: auto;
+  width: 16.5rem;
+  z-index: 200;
+  display: none !important;
+  margin: 0;
+  padding: 0.4rem 0;
+  background: #111318;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22);
 }
 
-.masthead__dropdown a {
-  color: #f4f1ea !important;
+.nav-links:hover .nav-links__panel {
+  display: block !important;
+}
+
+.greedy-nav .nav-links__panel a,
+.nav-links__panel a {
+  display: block;
   margin: 0 !important;
   padding: 0.55rem 1rem;
+  color: #f4f1ea !important;
   white-space: nowrap;
 }
 
-.masthead__dropdown a:hover,
-.masthead__dropdown a:focus {
+.greedy-nav .nav-links__panel a:before {
+  display: none !important;
+}
+
+.nav-links__panel a:hover,
+.nav-links__panel a:focus {
   background: #c9a227;
   color: #111318 !important;
 }
 
-.masthead__menu-item--dropdown:hover .masthead__dropdown,
-.masthead__menu-item--dropdown:focus-within .masthead__dropdown,
-.masthead__menu-item--dropdown.is-open .masthead__dropdown {
-  display: block;
-}
-
-.greedy-nav .hidden-links .masthead__dropdown {
-  background: transparent;
+.greedy-nav .hidden-links .nav-links__panel {
+  position: static !important;
+  display: none !important;
+  min-width: 0;
   border: 0;
   box-shadow: none;
-  display: block;
-  min-width: 0;
-  position: static;
+  background: transparent;
 }
 
-.greedy-nav .hidden-links .masthead__dropdown a {
-  padding-inline-start: 1.6rem;
+.greedy-nav .hidden-links .nav-links:hover .nav-links__panel {
+  display: block !important;
 }
 
 .home {
@@ -182,7 +184,6 @@
   position: relative;
   max-width: 1180px;
   margin: 0 auto;
-  max-height: min(78vh, 720px);
   aspect-ratio: 16 / 9;
   background: #0d0f14;
   overflow: hidden;
@@ -195,39 +196,33 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  object-fit: cover;
+  object-position: 38% 18%;
   pointer-events: none;
 }
 
 .hero-puzzle__board {
-  --puzzle-cols: 26;
-  --puzzle-rows: 16;
   display: grid;
-  grid-template-columns: repeat(var(--puzzle-cols), 1fr);
-  grid-template-rows: repeat(var(--puzzle-rows), 1fr);
-  gap: 2px;
-  background: #0d0f14;
+  grid-template-columns: repeat(16, minmax(0, 1fr));
+  grid-auto-rows: 1fr;
+  grid-auto-flow: dense;
+  gap: 0;
   position: absolute;
   inset: 0;
   width: 100%;
+  height: 100%;
+  background: transparent;
 }
 
-.hero-puzzle__piece,
-.hero-puzzle__filler {
+.hero-puzzle__piece {
   display: block;
   min-width: 0;
   min-height: 0;
   margin: 0;
-  box-shadow: 0 0 0 1px rgba(201, 162, 39, 0.9);
-}
-
-.hero-puzzle__piece {
-  perspective: 700px;
+  perspective: 800px;
   z-index: 1;
-}
-
-.hero-puzzle__filler {
-  pointer-events: none;
+  outline: 2px solid #c9a227;
+  outline-offset: -2px;
 }
 
 .hero-puzzle__inner {
@@ -236,7 +231,7 @@
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
-  transition: transform 0.38s ease;
+  transition: transform 0.35s ease;
 }
 
 .hero-puzzle__face {
@@ -247,33 +242,31 @@
 }
 
 .hero-puzzle__face--front {
-  background-repeat: no-repeat;
+  background: rgba(13, 15, 20, 0.2);
 }
 
 .hero-puzzle__face--back {
   align-items: center;
-  background: #111318;
-  color: #f3d789;
+  background: #c9a227;
+  color: #111318;
   display: flex;
-  font-size: clamp(0.55rem, 1.1vw, 0.95rem);
+  font-size: clamp(0.6rem, 1.15vw, 1rem);
   font-weight: 700;
   justify-content: center;
   line-height: 1.15;
-  padding: 0.2rem;
+  padding: 0.25rem;
   text-align: center;
   transform: rotateY(180deg);
 }
 
-.hero-puzzle__piece.is-flipped {
+.hero-puzzle__piece:hover,
+.hero-puzzle__piece:focus-visible {
   z-index: 8;
 }
 
-.hero-puzzle__piece.is-flipped .hero-puzzle__inner {
-  transform: rotateY(180deg) scale(1.18);
-}
-
-.hero-puzzle__piece[data-span="1"].is-flipped .hero-puzzle__inner {
-  transform: rotateY(180deg) scale(2.1);
+.hero-puzzle__piece:hover .hero-puzzle__inner,
+.hero-puzzle__piece:focus-visible .hero-puzzle__inner {
+  transform: rotateY(180deg) scale(1.7);
 }
 
 .hero-puzzle__piece:focus-visible {
@@ -336,64 +329,54 @@
 }
 
 .home-latest__grid {
-  display: grid;
-  gap: 1.15rem;
+  display: grid !important;
+  gap: 0.7rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  list-style: none;
+  list-style: none !important;
   margin: 0;
   padding: 0;
 }
 
-.home-card {
-  background: #fff;
-  box-shadow: 0 10px 24px rgba(28, 26, 22, 0.08);
+.home-tile {
   min-width: 0;
+  margin: 0;
 }
 
-.home-card__link {
-  color: inherit;
-  display: flex;
-  flex-direction: column;
-  height: 100%;
+.home-tile__link {
+  color: #fff;
+  display: block;
+  position: relative;
   text-decoration: none;
 }
 
-.home-card__media {
-  aspect-ratio: 16 / 10;
+.home-tile__media {
+  aspect-ratio: 1 / 1;
   background: #d9d3c5;
   display: block;
   overflow: hidden;
 }
 
-.home-card__media img {
+.home-tile__media img {
   display: block;
   height: 100%;
   object-fit: cover;
   width: 100%;
 }
 
-.home-card__body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  gap: 0.35rem;
-  padding: 0.9rem 1rem 1.1rem;
+.home-tile__caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.6rem 0.75rem 0.7rem;
+  background: linear-gradient(transparent, rgba(13, 15, 20, 0.88));
 }
 
-.home-card__date {
-  color: #6d675c;
-  font-size: 0.82rem;
-}
-
-.home-card__title {
-  font-size: 1.05rem;
+.home-tile__title {
+  display: block;
+  font-size: 0.95rem;
   font-weight: 700;
-  line-height: 1.3;
-}
-
-.home-card__excerpt {
-  color: #4c473e;
-  font-size: 0.92rem;
+  line-height: 1.25;
 }
 
 .home-cta {
@@ -413,7 +396,11 @@
 
 @media (max-width: 860px) {
   .home-latest__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .hero-puzzle__board {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
   }
 }
 
@@ -428,7 +415,16 @@
   }
 
   .home-latest__grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.4rem;
+  }
+
+  .home-tile__title {
+    font-size: 0.72rem;
+  }
+
+  .hero-puzzle__board {
+    grid-template-columns: repeat(10, minmax(0, 1fr));
   }
 }
 

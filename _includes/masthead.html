@@ -15,22 +15,17 @@
         <ul class="visible-links">
           {%- for link in site.data.navigation.main -%}
             {%- if link.children -%}
-              <li class="masthead__menu-item masthead__menu-item--dropdown">
-                <button type="button" class="masthead__dropdown-toggle" aria-expanded="false" aria-haspopup="true">
-                  {{ link.title }}
-                  <span class="masthead__caret" aria-hidden="true"></span>
-                </button>
-                <ul class="masthead__dropdown">
+              <li class="masthead__menu-item nav-links">
+                <span class="nav-links__label">{{ link.title }} <span class="masthead__caret" aria-hidden="true"></span></span>
+                <div class="nav-links__panel">
                   {%- for child in link.children -%}
-                    <li>
-                      {%- if child.url contains "://" -%}
-                        <a href="{{ child.url }}" target="_blank" rel="noopener noreferrer">{{ child.title }}</a>
-                      {%- else -%}
-                        <a href="{{ child.url | relative_url }}">{{ child.title }}</a>
-                      {%- endif -%}
-                    </li>
+                    {%- if child.url contains "://" -%}
+                      <a href="{{ child.url }}" target="_blank" rel="noopener noreferrer">{{ child.title }}</a>
+                    {%- else -%}
+                      <a href="{{ child.url | relative_url }}">{{ child.title }}</a>
+                    {%- endif -%}
                   {%- endfor -%}
-                </ul>
+                </div>
               </li>
             {%- else -%}
               <li class="masthead__menu-item">
@@ -58,35 +53,3 @@
     </div>
   </div>
 </div>
-<script>
-(function () {
-  function bindDropdowns() {
-    document.querySelectorAll(".masthead__menu-item--dropdown").forEach(function (item) {
-      if (item.getAttribute("data-dropdown-bound") === "1") return;
-      item.setAttribute("data-dropdown-bound", "1");
-      var button = item.querySelector(".masthead__dropdown-toggle");
-      if (!button) return;
-      button.addEventListener("click", function (event) {
-        event.preventDefault();
-        var open = item.classList.toggle("is-open");
-        button.setAttribute("aria-expanded", open ? "true" : "false");
-      });
-    });
-  }
-  bindDropdowns();
-  document.addEventListener("click", function (event) {
-    document.querySelectorAll(".masthead__menu-item--dropdown.is-open").forEach(function (item) {
-      if (!item.contains(event.target)) {
-        item.classList.remove("is-open");
-        var button = item.querySelector(".masthead__dropdown-toggle");
-        if (button) button.setAttribute("aria-expanded", "false");
-      }
-    });
-  });
-  var nav = document.getElementById("site-nav");
-  if (nav && window.MutationObserver) {
-    new MutationObserver(bindDropdowns).observe(nav, { childList: true, subtree: true });
-  }
-})();
-</script>
-
