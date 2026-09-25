@@ -69,10 +69,25 @@
 .layout--home .greedy-nav a,
 .layout--home .nav-links__label,
 .layout--home .site-title,
+.layout--home .site-logo,
 .layout--home .page__footer a,
 .layout--home .page__footer,
 .layout--home .search__toggle {
   color: #f4f1ea;
+}
+
+.site-logo {
+  align-items: center;
+  color: inherit;
+  display: inline-flex;
+  flex: 0 0 auto;
+  margin-inline-end: 0.65rem;
+}
+
+.site-logo__mark {
+  display: block;
+  height: 2.15rem;
+  width: auto;
 }
 
 .layout--home .navicon,
@@ -212,7 +227,7 @@
     radial-gradient(circle at 78% 18%, rgba(201, 162, 39, 0.18), transparent 28%),
     linear-gradient(180deg, #0d0f14 0%, #171a22 72%, #f4f1ea 100%);
   color: #f7f3ea;
-  padding: 1.25rem 1.25rem 3rem;
+  padding: 0 1.25rem 1.5rem;
 }
 
 .hero-puzzle__frame {
@@ -344,31 +359,6 @@
   outline-offset: 1px;
 }
 
-.hero-puzzle__copy {
-  max-width: 1180px;
-  margin: 1.4rem auto 0;
-}
-
-.hero-puzzle__eyebrow {
-  letter-spacing: 0.14em;
-  margin: 0 0 0.35rem;
-  opacity: 0.72;
-  text-transform: uppercase;
-  font-size: 0.78rem;
-}
-
-.hero-puzzle__title {
-  font-size: clamp(2.1rem, 6vw, 4.2rem);
-  line-height: 1.05;
-  margin: 0 0 0.6rem;
-}
-
-.hero-puzzle__hint {
-  max-width: 42rem;
-  margin: 0;
-  opacity: 0.86;
-}
-
 #main.home-main {
   width: 100%;
   max-width: 1180px;
@@ -378,7 +368,7 @@
 }
 
 .home-latest {
-  margin-top: -1rem;
+  margin-top: 0.75rem;
 }
 
 .home-latest__head {

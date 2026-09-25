@@ -2,11 +2,6 @@
 {% assign puzzle_limit = site.hero_puzzle_tag_limit | default: 30 %}
 {% capture ranked_blob %}{% for tag in site.tags %}{{ tag[1].size | plus: 100000 }}::{{ tag[0] }}{% unless forloop.last %}##{% endunless %}{% endfor %}{% endcapture %}
 {% assign ranked = ranked_blob | split: "##" | sort | reverse %}
-{% if ranked.size < puzzle_limit %}
-  {% assign puzzle_shown = ranked.size %}
-{% else %}
-  {% assign puzzle_shown = puzzle_limit %}
-{% endif %}
 <section class="hero-puzzle" aria-label="Герой с етикети">
   <div class="hero-puzzle__frame">
     <img
@@ -38,13 +33,5 @@
         </a>
       {%- endfor -%}
     </div>
-  </div>
-
-  <div class="hero-puzzle__copy">
-    <p class="hero-puzzle__eyebrow">Християнски център Прелом</p>
-    <h1 class="hero-puzzle__title">Утре е сега!</h1>
-    <p class="hero-puzzle__hint">
-      {{ puzzle_shown }} най-използвани етикета от {{ site.tags.size }} — отварят се едно по едно, докато покрият снимката.
-    </p>
   </div>
 </section>

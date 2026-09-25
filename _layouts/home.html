@@ -4,6 +4,7 @@ layout: default
 {%- assign locale = page.locale | default: layout.locale | default: site.locale -%}
 
 <div class="home">
+  <h1 class="visually-hidden">{{ site.title | escape }}</h1>
   {% include hero-puzzle.html %}
 
   <div id="main" class="home-main" role="main">
