@@ -1,0 +1,35 @@
+{% comment %}
+  Static replacement for the broken Jetpack contact form on /contact/.
+  Basic HTML POST to Formspree. After a successful submit, Formspree redirects to /thanks/.
+{% endcomment %}
+{% assign endpoint = site.formspree_endpoint | default: "https://formspree.io/f/YOUR_FORM_ID" %}
+<form class="contact-form" action="{{ endpoint }}" method="POST" accept-charset="UTF-8">
+  <input type="hidden" name="_subject" value="Запитване от prelom.bg">
+  <input type="hidden" name="_next" value="{{ site.url }}{{ site.baseurl }}/thanks/">
+  <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" class="contact-form__hp">
+  <p>
+    <label for="contact-name">Вашето име
+      <input id="contact-name" type="text" name="name" required autocomplete="name">
+    </label>
+  </p>
+  <p>
+    <label for="contact-email">Email
+      <input id="contact-email" type="email" name="email" required autocomplete="email">
+    </label>
+  </p>
+  <p>
+    <label for="contact-message">Вашият текст, запитване, въпрос и т.н.
+      <textarea id="contact-message" name="message" rows="8" required></textarea>
+    </label>
+  </p>
+  <p>
+    <button type="submit" class="btn btn--primary">Изпрати</button>
+  </p>
+  {% if endpoint contains "YOUR_FORM_ID" %}
+  <p class="notice--warning" role="status">
+    Формулярът все още използва <strong>placeholder</strong> адрес на Formspree
+    (<code>formspree_endpoint</code> в <code>_config.yml</code>).
+    Създайте форма и сменете адреса.
+  </p>
+  {% endif %}
+</form>

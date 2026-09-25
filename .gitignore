@@ -1,0 +1,13 @@
+_site/
+.sass-cache/
+.jekyll-cache/
+.jekyll-metadata
+vendor/bundle/
+.bundle/
+tmp/
+__pycache__/
+*.pyc
+migration/raw/
+.DS_Store
+*.swp
+*~

@@ -1,0 +1,19 @@
+{
+  "inventory_urls": 348,
+  "resolved": 347,
+  "unresolved": 1,
+  "unresolved_by_reason": {
+    "media-file-missing": 1
+  },
+  "unresolved_by_type": {
+    "media": 1
+  },
+  "missing": [
+    {
+      "type": "media",
+      "url": "https://prelom.bg/wp-content/uploads/2017/09/Samuel-Rivers-092017.doc",
+      "path": "/wp-content/uploads/2017/09/Samuel-Rivers-092017.doc",
+      "reason": "media-file-missing"
+    }
+  ]
+}

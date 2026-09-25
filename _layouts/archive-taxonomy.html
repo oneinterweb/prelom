@@ -1,0 +1,43 @@
+---
+layout: archive
+---
+
+{% assign items = "" | split: "" %}
+{% if page.taxonomy_type == "category" %}
+  {% for post in site.posts %}
+    {% if post.categories contains page.taxonomy %}
+      {% assign items = items | push: post %}
+    {% endif %}
+  {% endfor %}
+  {% for pg in site.pages %}
+    {% if pg.categories contains page.taxonomy %}
+      {% assign items = items | push: pg %}
+    {% endif %}
+  {% endfor %}
+{% elsif page.taxonomy_type == "tag" %}
+  {% for post in site.posts %}
+    {% if post.tags contains page.taxonomy %}
+      {% assign items = items | push: post %}
+    {% endif %}
+  {% endfor %}
+  {% for pg in site.pages %}
+    {% if pg.tags contains page.taxonomy %}
+      {% assign items = items | push: pg %}
+    {% endif %}
+  {% endfor %}
+{% elsif page.taxonomy_type == "author" %}
+  {% for post in site.posts %}
+    {% if post.author == page.taxonomy or post.author_slug == page.taxonomy %}
+      {% assign items = items | push: post %}
+    {% endif %}
+  {% endfor %}
+{% endif %}
+
+{% if items.size > 0 %}
+  {% assign entries_layout = page.entries_layout | default: 'list' %}
+  <div class="entries-{{ entries_layout }}">
+    {% include documents-collection.html entries=items sort_by="date" sort_order="reverse" type=entries_layout %}
+  </div>
+{% else %}
+  <p>Няма публикации в този архив.</p>
+{% endif %}

@@ -1,0 +1,61 @@
+---
+# Only the main Sass file needs front matter
+---
+
+@charset "utf-8";
+
+@import "minimal-mistakes/skins/{{ site.minimal_mistakes_skin | default: 'default' }}";
+@import "minimal-mistakes";
+
+.responsive-embed {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: 840px;
+  margin: 1.5rem auto;
+  aspect-ratio: 16 / 9;
+}
+
+.responsive-embed iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+.contact-form label,
+.mailchimp-form label,
+.paypal-donate,
+.home-manifesto {
+  display: block;
+}
+
+.contact-form input[type="text"],
+.contact-form input[type="email"],
+.contact-form textarea,
+.mailchimp-form input[type="text"],
+.mailchimp-form input[type="email"] {
+  display: block;
+  width: 100%;
+  max-width: 36rem;
+  margin-top: 0.35rem;
+}
+
+.contact-form__hp {
+  position: absolute !important;
+  left: -9999px !important;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+.home-cover {
+  margin: 2rem 0;
+}
+
+.home-cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
