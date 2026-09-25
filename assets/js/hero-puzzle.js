@@ -30,8 +30,11 @@
     return Math.max(1, cols.split(" ").length);
   }
 
+  var packedCols = 0;
+
   function pack() {
     var cols = columnCount();
+    packedCols = cols;
     var occupancy = [];
 
     function row(r) {
@@ -266,6 +269,12 @@
   var resizeTimer = 0;
   window.addEventListener("resize", function () {
     window.clearTimeout(resizeTimer);
-    resizeTimer = window.setTimeout(resetAndPlay, 160);
+    resizeTimer = window.setTimeout(function () {
+      if (columnCount() === packedCols) {
+        fitAll();
+        return;
+      }
+      resetAndPlay();
+    }, 160);
   });
 })();
