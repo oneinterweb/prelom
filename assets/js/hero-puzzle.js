@@ -84,13 +84,25 @@
       }
     });
 
+    var fillers = [];
+    for (var fr = 0; fr < rows; fr += 1) {
+      for (var fc = 0; fc < cols; fc += 1) {
+        if (!occupied(fr, fc)) {
+          fillers.push({ col: fc, row: fr, span: 1 });
+          mark(fr, fc, 1);
+        }
+      }
+    }
+    items.fillers = fillers;
+
     return rows;
   }
 
-  function columnCount(width) {
-    if (width < 520) return 14;
-    if (width < 800) return 20;
-    return 26;
+  function columnCount() {
+    var cells = pieces.reduce(function (sum, piece) {
+      return sum + piece.span * piece.span;
+    }, 0);
+    return Math.max(18, Math.round(Math.sqrt(cells * (16 / 9))));
   }
 
   var nodes = [];
@@ -110,7 +122,7 @@
   }
 
   function render() {
-    var cols = columnCount(frame.clientWidth || root.clientWidth || 960);
+    var cols = columnCount();
     var rows = pack(pieces, cols);
     frame.style.aspectRatio = cols + " / " + rows;
     board.style.setProperty("--puzzle-cols", String(cols));
@@ -144,6 +156,18 @@
       link.appendChild(inner);
       board.appendChild(link);
       nodes.push(link);
+    });
+
+    (pieces.fillers || []).forEach(function (filler) {
+      var cell = document.createElement("span");
+      cell.className = "hero-puzzle__filler";
+      cell.style.gridColumn = filler.col + 1 + " / span " + filler.span;
+      cell.style.gridRow = filler.row + 1 + " / span " + filler.span;
+      var front = document.createElement("span");
+      front.className = "hero-puzzle__face hero-puzzle__face--front";
+      cell.appendChild(front);
+      board.appendChild(cell);
+      nodes.push(cell);
     });
 
     window.requestAnimationFrame(paintBackgrounds);
