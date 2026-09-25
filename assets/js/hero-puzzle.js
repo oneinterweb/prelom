@@ -130,7 +130,7 @@
       order[i].classList.add("is-flipped");
       fitLabel(order[i].querySelector(".hero-puzzle__face--back"));
       i += 1;
-      later(step, 180);
+      later(step, 3000);
     }
 
     step();
