@@ -155,13 +155,48 @@
   color: #111318 !important;
 }
 
+.greedy-nav .hidden-links {
+  background: #111318;
+  border: 1px solid #2c313c;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45);
+  min-width: 13.5rem;
+  padding: 0.3rem 0;
+}
+
+.greedy-nav .hidden-links::before {
+  border-bottom-color: #2c313c;
+}
+
+.greedy-nav .hidden-links::after {
+  border-bottom-color: #111318;
+}
+
+.greedy-nav .hidden-links li {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.greedy-nav .hidden-links a,
+.greedy-nav .hidden-links .nav-links__label {
+  color: #fff !important;
+  font-weight: 600;
+}
+
+.greedy-nav .hidden-links a:hover,
+.greedy-nav .hidden-links a:focus,
+.greedy-nav .hidden-links a:active,
+.greedy-nav .hidden-links a:focus-visible,
+.greedy-nav .hidden-links .nav-links:hover > .nav-links__label {
+  background: #c9a227 !important;
+  color: #111318 !important;
+}
+
 .greedy-nav .hidden-links .nav-links__panel {
   position: static !important;
   display: none !important;
   min-width: 0;
   border: 0;
   box-shadow: none;
-  background: transparent;
+  background: #0b0d12;
 }
 
 .greedy-nav .hidden-links .nav-links:hover .nav-links__panel {
