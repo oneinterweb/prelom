@@ -5,6 +5,7 @@ layout: home
 author_profile: false
 comments: false
 share: false
+search: false
 excerpt: "Апостолски център за духовно просвещение. Преместете курсора върху снимката, за да разкриете етикетите."
 header:
   teaser: /assets/images/hero-speaker.jpg

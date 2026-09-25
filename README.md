@@ -78,7 +78,7 @@ excerpt: "Кратко резюме за списъка и SEO."
 |---|---|
 | Коментари | Премахнати, без заместител |
 | Jetpack контактна форма (`/contact/`) | Статична HTML форма към **Formspree** (`formspree_endpoint` в `_config.yml`) |
-| Търсене `?s=` | Lunr търсене на [`/search/`](/search/) |
+| Търсене `?s=` | Lunr търсене на [`/search/`](/search/) (постове и съдържателни страници; формуляри, архиви и таксономии са изключени) |
 | Мъртви PTA / MC4WP / Jetpack shortcodes | Премахнати; празните страници пренасочват към `/contact/` |
 | deal.ai чат уиджет | Пропуснат |
 | YouTube, Rumble, Vimeo, Facebook, sermon.net, Adobe Spark, Typeform | Запазени като iframe |

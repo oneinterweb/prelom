@@ -5,6 +5,7 @@ slug: "dr-joseph-shulam-registration-form"
 layout: "single"
 author_profile: false
 comments: false
+search: false
 wp_id: 1069
 excerpt: "Поученията ще се проведат на 26.10.2019 (събота) от 16.00 до 19.00ч. и на 27.10.2019\
   \ (неделя) от 10.00 до 13.00ч. Адрес: гр. София, ул. Веслец, № 26 София Ако имате\
