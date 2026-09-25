@@ -4,6 +4,12 @@
 
 Предварителен адрес: **https://oneinterweb.github.io/prelom/** (`baseurl: "/prelom"`).
 
+Този URL е **404**, докато хранилището е private и Pages не е включен. Безплатният GitHub план не публикува private Pages (apostolos работи, защото е public). Направете следното:
+
+1. **Settings → General → Change repository visibility → Public**
+2. **Settings → Pages → Source = GitHub Actions**
+3. Merge на PR към `main` (workflow-ът се пуска само от `main`)
+
 ## Локално пускане
 
 Нужни са Ruby 3.2+, Bundler и (за повторна миграция) Python 3.
