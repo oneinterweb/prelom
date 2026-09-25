@@ -1,0 +1,17 @@
+main:
+  - title: "Начало"
+    url: /
+  - title: "Поучения"
+    url: /category/pouchenie/
+  - title: "YouTube"
+    url: "https://www.youtube.com/@PrelomCenter"
+  - title: "Facebook"
+    url: "https://www.facebook.com/prelomcenter"
+  - title: "X"
+    url: "https://2x1.io/3foldonX"
+  - title: "Контакти"
+    url: /contact/
+  - title: "Дарения"
+    url: /donate/
+  - title: "Търсене"
+    url: /search/

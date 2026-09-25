@@ -1,0 +1,5 @@
+# Media files that could not be copied from the live site
+# (Cloudflare blocks direct downloads from this environment).
+
+https://prelom.bg/wp-content/uploads/2017/09/Samuel-Rivers-092017.doc
+# Linked from the 2017-09-10 post. Retry from a residential IP or cPanel file manager.
