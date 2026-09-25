@@ -6,7 +6,8 @@
   if (!pieces.length) return;
 
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var timer = 0;
+  var playTimer = 0;
+  var holdTimer = 0;
   var current = null;
   var probe = document.createElement("div");
   probe.setAttribute("aria-hidden", "true");
@@ -102,30 +103,36 @@
     return pool[Math.floor(Math.random() * pool.length)];
   }
 
+  function armPlay(delay) {
+    window.clearTimeout(playTimer);
+    playTimer = window.setTimeout(play, delay);
+  }
+
   function play() {
     if (reduce) return;
     if (board.matches(":hover")) {
-      timer = window.setTimeout(play, 900);
+      armPlay(900);
       return;
     }
     clearFlip();
     var next = pick();
     if (!next) {
-      timer = window.setTimeout(play, 900);
+      armPlay(900);
       return;
     }
     current = next;
     next.classList.add("is-flipped");
     fitLabel(next.querySelector(".hero-puzzle__face--back"));
-    timer = window.setTimeout(function () {
+    window.clearTimeout(holdTimer);
+    holdTimer = window.setTimeout(function () {
       if (next.matches(":hover")) {
         current = null;
-        timer = window.setTimeout(play, 400);
+        armPlay(400);
         return;
       }
       next.classList.remove("is-flipped");
       current = null;
-      timer = window.setTimeout(play, 280);
+      armPlay(280);
     }, 5000);
   }
 
@@ -148,12 +155,10 @@
   }
   window.addEventListener("load", scheduleFit);
   window.addEventListener("resize", function () {
-    window.clearTimeout(timer);
     scheduleFit();
-    if (!reduce) timer = window.setTimeout(play, 800);
   });
 
   if (!reduce) {
-    timer = window.setTimeout(play, 5000);
+    armPlay(5000);
   }
 })();
