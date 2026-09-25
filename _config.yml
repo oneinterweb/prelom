@@ -39,8 +39,8 @@ search_provider: lunr
 comments:
   provider: false
 
-# Contact form on /contact/ POSTs here. Replace the placeholder after creating a Formspree form.
-formspree_endpoint: "https://formspree.io/f/YOUR_FORM_ID"
+# Contact form on /contact/ and /justice21/ POSTs here (Basic HTML).
+formspree_endpoint: "https://formspree.io/f/meaozyyk"
 # Hosted PayPal donate button copied from the live /donate/ form.
 paypal_hosted_button_id: "DXW5MGAQ43QSJ"
 # Optional PayPal business email if the hosted button is later replaced.

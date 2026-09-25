@@ -88,10 +88,10 @@ excerpt: "Кратко резюме за списъка и SEO."
 
 ## Какво трябва да направи собственикът
 
-1. **Settings → Pages → Source: GitHub Actions.**
-2. Направете хранилището **public** (безплатният план не публикува private Pages).
-3. Създайте Formspree форма и сменете `formspree_endpoint` в `_config.yml`.
-4. PayPal на `/donate/` използва hosted button `DXW5MGAQ43QSJ` от живата WP форма (`paypal_hosted_button_id` в `_config.yml`).
+1. **Settings → Pages → Source: GitHub Actions.** (готово)
+2. Хранилището е **public**. (готово)
+3. Formspree: `/contact/` и `/justice21/` пращат към `https://formspree.io/f/meaozyyk`. (готово)
+4. PayPal на `/donate/` използва hosted button `DXW5MGAQ43QSJ` (`paypal_hosted_button_id` в `_config.yml`).
 5. Когато сте готови за домейн: едната промяна на `baseurl`, файл `CNAME`, DNS (виж по-горе).
 
 ## Лиценз на съдържанието
