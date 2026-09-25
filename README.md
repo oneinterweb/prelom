@@ -2,13 +2,9 @@
 
 Статично Jekyll огледало на [prelom.bg](https://prelom.bg), тема [Minimal Mistakes](https://mademistakes.com/work/minimal-mistakes-jekyll-theme/), деплой към GitHub Pages чрез Actions.
 
-Предварителен адрес: **https://oneinterweb.github.io/prelom/** (`baseurl: "/prelom"`).
+Каноничен адрес: **https://prelom.bg** (`url: "https://prelom.bg"`, `baseurl: ""`). `www.prelom.bg` сочи с CNAME към `oneinterweb.github.io` и GitHub го пренасочва към apex.
 
-Този URL е **404**, докато хранилището е private и Pages не е включен. Безплатният GitHub план не публикува private Pages (apostolos работи, защото е public). Направете следното:
-
-1. **Settings → General → Change repository visibility → Public**
-2. **Settings → Pages → Source = GitHub Actions**
-3. Merge на PR към `main` (workflow-ът се пуска само от `main`)
+Този PR към `main` трябва да се merge-не **само при DNS cutover**. Merge чупи preview-а на `https://oneinterweb.github.io/prelom/`.
 
 ## Локално пускане
 
@@ -19,7 +15,7 @@ bundle install
 bundle exec jekyll serve
 ```
 
-Сайтът е на http://127.0.0.1:4000/prelom/ .
+Сайтът е на http://127.0.0.1:4000/ .
 
 Пълна повторна миграция от публичния HTML:
 
@@ -55,22 +51,14 @@ excerpt: "Кратко резюме за списъка и SEO."
 
 Страниците живеят в `_pages/` със собствен `permalink: /slug/`.
 
-## Превключване към домейн prelom.bg
+## Домейн prelom.bg
 
-1. В `_config.yml` сменете **само** този ред:
+Конфигурацията вече е за apex `prelom.bg` (`CNAME` в корена, празен `baseurl`).
 
-   ```yaml
-   baseurl: ""
-   ```
-
-   По желание сменете и `url:` на `https://prelom.bg`.
-
-2. Добавете файл `CNAME` в корена с един ред: `prelom.bg`.
-
-   **Не** добавяйте `CNAME`, докато преглеждате сайта на `oneinterweb.github.io/prelom/`.
-
-3. Насочете apex `prelom.bg` към GitHub Pages (A записи към [IP-тата на GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)). Запазете MX, SPF, DMARC, DKIM и google-site-verification.
-4. В GitHub: **Settings → Pages → Source = GitHub Actions** (не „Deploy from a branch“). Репозиторият трябва да е **public** за безплатен GitHub Pages план.
+1. Насочете apex `prelom.bg` към GitHub Pages (A записи към [IP-тата на GitHub Pages](https://docs.github.com/en/pages/configuring-a-custom-domain-for-your-github-pages-site/managing-a-custom-domain-for-your-github-pages-site)). Запазете MX, SPF, DMARC, DKIM и google-site-verification.
+2. `www.prelom.bg` → CNAME `oneinterweb.github.io` (GitHub пренасочва към apex).
+3. В GitHub: **Settings → Pages → Source = GitHub Actions** (не „Deploy from a branch“) и Custom domain = `prelom.bg`. Репозиторият трябва да е **public** за безплатен GitHub Pages план.
+4. Merge към `main` **само при DNS cutover** — preview-ът `oneinterweb.github.io/prelom` спира да работи.
 
 ## Премахнати / заменени функции
 
@@ -92,7 +80,7 @@ excerpt: "Кратко резюме за списъка и SEO."
 2. Хранилището е **public**. (готово)
 3. Formspree: `/contact/` и `/justice21/` пращат към `https://formspree.io/f/meaozyyk`. (готово)
 4. PayPal на `/donate/` използва hosted button `DXW5MGAQ43QSJ` (`paypal_hosted_button_id` в `_config.yml`).
-5. Когато сте готови за домейн: едната промяна на `baseurl`, файл `CNAME`, DNS (виж по-горе).
+5. Домейн: `CNAME` + празен `baseurl` са готови; merge към `main` само при DNS cutover (виж по-горе).
 
 ## Лиценз на съдържанието
 
