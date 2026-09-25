@@ -222,7 +222,8 @@
 }
 
 .greedy-nav .hidden-links .nav-links__label {
-  display: block;
+  display: flex;
+  align-items: center;
   margin: 0;
   padding: 10px 20px;
 }
