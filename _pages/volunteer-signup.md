@@ -5,6 +5,7 @@ slug: "volunteer-signup"
 layout: "single"
 author_profile: false
 comments: false
+search: false
 wp_id: 125
 excerpt: "Добре дошли в страницата за доброволчество на Християнски Център Прелом! Поради естеството\
   \ на доброволческата дейност, за момента ще използваме този уебсайт за координиране\

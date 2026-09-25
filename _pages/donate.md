@@ -5,6 +5,7 @@ slug: "donate"
 layout: "single"
 author_profile: false
 comments: false
+search: false
 wp_id: 65
 excerpt: "Тук можете да направите дарение в евро чрез PayPal:"
 ---

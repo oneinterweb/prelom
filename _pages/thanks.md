@@ -4,6 +4,7 @@ permalink: /thanks/
 layout: single
 author_profile: false
 sitemap: false
+search: false
 ---
 
 Съобщението е изпратено. Ще се свържем с вас на посочения email.

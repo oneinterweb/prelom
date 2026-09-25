@@ -35,6 +35,10 @@ permalink: /:slug/
 search: true
 search_full_content: true
 search_provider: lunr
+# Index standalone pages (charter, statements, etc.) as well as posts.
+# Utility/form pages and _pages/tax archives set search: false.
+lunr:
+  search_within_pages: true
 
 comments:
   provider: false
@@ -102,6 +106,10 @@ defaults:
       author_profile: false
       comments: false
       share: false
+  - scope:
+      path: "_pages/tax"
+    values:
+      search: false
 
 category_archive:
   type: jekyll-archives
