@@ -56,8 +56,8 @@
   function fitLabel(face) {
     var label = face && face.querySelector(".hero-puzzle__label");
     if (!label) return;
-    var width = face.clientWidth - 10;
-    var height = face.clientHeight - 10;
+    var width = face.clientWidth - 16;
+    var height = face.clientHeight - 16;
     if (width < 4 || height < 4) return;
 
     var text = (label.textContent || "").replace(/\s+/g, " ").trim();
@@ -126,7 +126,7 @@
       next.classList.remove("is-flipped");
       current = null;
       timer = window.setTimeout(play, 280);
-    }, 1500);
+    }, 5000);
   }
 
   function scheduleFit() {

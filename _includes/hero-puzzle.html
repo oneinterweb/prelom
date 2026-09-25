@@ -1,4 +1,12 @@
 {% assign puzzle_src = '/assets/images/hero-speaker.jpg' | relative_url %}
+{% assign puzzle_limit = site.hero_puzzle_tag_limit | default: 30 %}
+{% capture ranked_blob %}{% for tag in site.tags %}{{ tag[1].size | plus: 100000 }}::{{ tag[0] }}{% unless forloop.last %}##{% endunless %}{% endfor %}{% endcapture %}
+{% assign ranked = ranked_blob | split: "##" | sort | reverse %}
+{% if ranked.size < puzzle_limit %}
+  {% assign puzzle_shown = ranked.size %}
+{% else %}
+  {% assign puzzle_shown = puzzle_limit %}
+{% endif %}
 <section class="hero-puzzle" aria-label="Герой с етикети">
   <div class="hero-puzzle__frame">
     <img
@@ -9,13 +17,11 @@
       height="1080"
     >
     <div class="hero-puzzle__board">
-      {%- for tag in site.tags -%}
-        {%- assign tname = tag[0] -%}
-        {%- assign tcount = tag[1].size -%}
+      {%- for item in ranked limit: puzzle_limit -%}
+        {%- assign tname = item | split: "::" | last -%}
+        {%- assign tcount = site.tags[tname].size -%}
         {%- assign tile_span = 1 -%}
-        {%- if tcount >= 12 -%}
-          {%- assign tile_span = 3 -%}
-        {%- elsif tcount >= 4 -%}
+        {%- if forloop.index <= 2 or tcount >= 12 -%}
           {%- assign tile_span = 2 -%}
         {%- endif -%}
         {%- assign tlabel = tname | replace: '-', ' ' -%}
@@ -26,6 +32,7 @@
           title="{{ tlabel }} · {{ tcount }}"
           data-span="{{ tile_span }}"
           data-tag="{{ tlabel | escape }}"
+          data-count="{{ tcount }}"
           style="grid-column: span {{ tile_span }}; grid-row: span {{ tile_span }}; --tag-len: {{ tlabel.size }};"
         >
           <span class="hero-puzzle__inner">
@@ -41,7 +48,7 @@
     <p class="hero-puzzle__eyebrow">Християнски център Прелом</p>
     <h1 class="hero-puzzle__title">Утре е сега!</h1>
     <p class="hero-puzzle__hint">
-      {{ site.tags.size }} етикета — посочете квадратче, за да го обърнете и да видите етикета.
+      {{ puzzle_shown }} най-използвани етикета от {{ site.tags.size }} — посочете квадратче, за да го обърнете и да видите етикета.
       По-използваните етикети са по-големи.
     </p>
   </div>

@@ -39,6 +39,9 @@ search_provider: lunr
 comments:
   provider: false
 
+# Homepage puzzle uses the N most-used tags, recomputed on each build.
+hero_puzzle_tag_limit: 30
+
 # Contact form on /contact/ and /justice21/ POSTs here (Basic HTML).
 formspree_endpoint: "https://formspree.io/f/meaozyyk"
 # Hosted PayPal donate button copied from the live /donate/ form.

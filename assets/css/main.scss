@@ -203,7 +203,7 @@
 
 .hero-puzzle__board {
   display: grid;
-  grid-template-columns: repeat(16, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   grid-auto-rows: 1fr;
   grid-auto-flow: dense;
   gap: 0;
@@ -249,14 +249,15 @@
   align-items: center;
   background: #c9a227;
   box-sizing: border-box;
-  color: #111318;
+  color: #fff;
   container-type: size;
   display: flex;
   font-weight: 700;
   justify-content: center;
   overflow: hidden;
-  padding: 4px;
+  padding: 8px;
   text-align: center;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
   transform: rotateY(180deg);
   width: 100%;
   height: 100%;
@@ -265,7 +266,7 @@
 .hero-puzzle__label {
   box-sizing: border-box;
   display: block;
-  font-size: clamp(6px, min(18cqmin, calc(86cqi / var(--tag-len, 10))), 2rem);
+  font-size: clamp(10px, min(22cqmin, calc(90cqi / var(--tag-len, 10))), 2.6rem);
   line-height: 1.05;
   max-height: 100%;
   max-width: 100%;
@@ -420,7 +421,7 @@
   }
 
   .hero-puzzle__board {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+    grid-template-columns: repeat(5, minmax(0, 1fr));
   }
 }
 
@@ -444,7 +445,7 @@
   }
 
   .hero-puzzle__board {
-    grid-template-columns: repeat(10, minmax(0, 1fr));
+    grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 }
 
