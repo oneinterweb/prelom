@@ -9,12 +9,10 @@ title_separator: "|"
 subtitle: "Утре е сега!"
 description: "Официален сайт на Християнски център Прелом."
 name: "Християнски Център Прелом"
-url: "https://oneinterweb.github.io"
-# Preview first at https://oneinterweb.github.io/prelom/
-# To switch to the custom domain prelom.bg, change the next line to:
-#   baseurl: ""
-# then add a CNAME file containing prelom.bg (see README).
-baseurl: "/prelom"
+url: "https://prelom.bg"
+# Apex canonical. www.prelom.bg CNAMEs to oneinterweb.github.io and GitHub redirects it.
+# Merging this while the site is still previewed at oneinterweb.github.io/prelom breaks that preview.
+baseurl: ""
 repository: "oneinterweb/prelom"
 
 logo: "/assets/images/logo.jpg"
@@ -135,6 +133,7 @@ plugins:
 include:
   - _pages
   - wp-content
+  - CNAME
 
 exclude:
   - migration/

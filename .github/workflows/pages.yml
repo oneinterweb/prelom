@@ -32,7 +32,10 @@ jobs:
         uses: actions/configure-pages@v5
 
       - name: Build with Jekyll
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        # Use _config.yml (url: https://prelom.bg, baseurl: "") so the first
+        # custom-domain deploy is not still prefixed with /prelom from
+        # configure-pages' project-site base_path.
+        run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
 
