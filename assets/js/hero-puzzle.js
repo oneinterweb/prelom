@@ -105,19 +105,21 @@
     });
   }
 
-  function revealOrder() {
-    return pieces.slice().sort(function (a, b) {
-      var ar = Number(a.dataset.r);
-      var br = Number(b.dataset.r);
-      if (ar !== br) return ar - br;
-      return Number(a.dataset.c) - Number(b.dataset.c);
-    });
+  function shuffle(list) {
+    var arr = list.slice();
+    for (var i = arr.length - 1; i > 0; i -= 1) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var swap = arr[i];
+      arr[i] = arr[j];
+      arr[j] = swap;
+    }
+    return arr;
   }
 
   function reveal() {
     board.classList.remove("is-closing");
     indexPieces();
-    var order = revealOrder();
+    var order = shuffle(pieces);
     var i = 0;
 
     function step() {
@@ -128,7 +130,7 @@
       order[i].classList.add("is-flipped");
       fitLabel(order[i].querySelector(".hero-puzzle__face--back"));
       i += 1;
-      later(step, 160);
+      later(step, 180);
     }
 
     step();
@@ -137,45 +139,29 @@
   function dominoClose() {
     board.classList.add("is-closing");
     indexPieces();
-    var byKey = {};
-    pieces.forEach(function (piece) {
-      byKey[piece.dataset.r + ":" + piece.dataset.c] = piece;
+    var order = pieces.slice().sort(function (a, b) {
+      var aSum = Number(a.dataset.r) + Number(a.dataset.c);
+      var bSum = Number(b.dataset.r) + Number(b.dataset.c);
+      if (aSum !== bSum) return aSum - bSum;
+      if (Number(a.dataset.r) !== Number(b.dataset.r)) return Number(a.dataset.r) - Number(b.dataset.r);
+      return Number(a.dataset.c) - Number(b.dataset.c);
     });
+    var i = 0;
 
-    var start = byKey["0:0"] || pieces[0];
-    var seen = {};
-    var waves = [[start]];
-    seen[start.dataset.r + ":" + start.dataset.c] = true;
-
-    for (var w = 0; w < waves.length; w += 1) {
-      var next = [];
-      waves[w].forEach(function (piece) {
-        var r = Number(piece.dataset.r);
-        var c = Number(piece.dataset.c);
-        [[0, 1], [1, 0]].forEach(function (delta) {
-          var key = r + delta[0] + ":" + (c + delta[1]);
-          if (byKey[key] && !seen[key]) {
-            seen[key] = true;
-            next.push(byKey[key]);
-          }
-        });
-      });
-      if (next.length) waves.push(next);
+    function step() {
+      if (i >= order.length) {
+        later(function () {
+          board.classList.remove("is-closing");
+          later(reveal, 500);
+        }, 420);
+        return;
+      }
+      order[i].classList.remove("is-flipped");
+      i += 1;
+      later(step, 70);
     }
 
-    waves.forEach(function (wave, index) {
-      later(function () {
-        wave.forEach(function (piece) {
-          piece.classList.remove("is-flipped");
-        });
-        if (index === waves.length - 1) {
-          later(function () {
-            board.classList.remove("is-closing");
-            later(reveal, 480);
-          }, 360);
-        }
-      }, index * 75);
-    });
+    step();
   }
 
   function resetAndPlay() {
