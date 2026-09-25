@@ -324,7 +324,7 @@ def rewrite_site_href(url: str) -> str | None:
         rel = path.split("/wp-content/uploads/", 1)[1]
         rel = THUMB_RE.sub("", rel)
         return "@@BASEURL@@/wp-content/uploads/" + rel.lstrip("/")
-    if "/wp-content/" in path or "/wp-json/" in path:
+    if "/wp-content/" in path or "/wp-json/" in path or "/wp-admin/" in path:
         return None
     parts = [p for p in path.split("/") if p]
     new_path = "/" + "/".join(parts)
@@ -393,6 +393,7 @@ def html_to_markdown(html: str) -> str:
     md = re.sub(r"^Add your Typeform title here\s*", "", md, flags=re.M)
     md = re.sub(r"html\{\s*margin:\s*0;[^}]+\}(?:\s*iframe\{[^}]+\})?", "", md)
     md = md.replace("/аudio/", "/audio/")
+    md = md.replace("]({{ site.baseurl }}/wp-admin/post.php)", "]({{ site.baseurl }}/ден-15-семейство-от-семейства/)")
     md = re.sub(r"^#\s*$", "", md, flags=re.M)
     md = re.sub(r"\n{3,}", "\n\n", md).strip() + "\n"
     return md

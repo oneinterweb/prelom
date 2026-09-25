@@ -38,6 +38,8 @@ def main() -> int:
                 continue
             checked += 1
             path = raw
+            if path.startswith("/prelom/") or path == "/prelom":
+                path = path[len("/prelom") :] or "/"
             if not exists(path):
                 broken.append({"page": str(html.relative_to(ROOT)), "href": raw})
     report = {"checked": checked, "broken": len(broken), "items": broken[:200]}
