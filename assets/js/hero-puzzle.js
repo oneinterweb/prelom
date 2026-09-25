@@ -8,45 +8,69 @@
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   var timer = 0;
   var current = null;
-  var probe = document.createElement("span");
+  var probe = document.createElement("div");
   probe.setAttribute("aria-hidden", "true");
-  probe.style.cssText = [
-    "position:absolute",
-    "left:-9999px",
-    "top:0",
-    "display:block",
-    "box-sizing:border-box",
-    "line-height:1.05",
-    "font-weight:700",
-    "text-align:center",
-    "white-space:normal",
-    "word-break:break-word",
-    "overflow-wrap:anywhere",
-    "pointer-events:none"
-  ].join(";");
+  probe.style.cssText = "all:initial;position:fixed;left:-12000px;top:0;visibility:hidden;pointer-events:none;";
   document.body.appendChild(probe);
+
+  function estimateFont(width, height, text) {
+    var chars = Math.max(1, String(text || "").replace(/\s+/g, "").length);
+    var lo = 5;
+    var hi = Math.max(6, Math.min(width, height) * 0.9);
+    var best = lo;
+    for (var i = 0; i < 18; i += 1) {
+      var fs = (lo + hi) / 2;
+      var charW = fs * 0.7;
+      var lineH = fs * 1.12;
+      var maxLines = Math.max(1, Math.floor(height / lineH));
+      var charsPerLine = Math.max(1, Math.floor(width / charW));
+      if (chars <= maxLines * charsPerLine && lineH <= height && charW <= width) {
+        best = fs;
+        lo = fs;
+      } else {
+        hi = fs;
+      }
+    }
+    return best;
+  }
+
+  function measure(text, fontFamily, width, fontSize) {
+    probe.textContent = text;
+    probe.style.display = "block";
+    probe.style.boxSizing = "border-box";
+    probe.style.width = width + "px";
+    probe.style.fontFamily = fontFamily || "sans-serif";
+    probe.style.fontSize = fontSize + "px";
+    probe.style.fontWeight = "700";
+    probe.style.lineHeight = "1.05";
+    probe.style.textAlign = "center";
+    probe.style.whiteSpace = "normal";
+    probe.style.overflowWrap = "anywhere";
+    probe.style.wordBreak = "break-word";
+    return {
+      w: probe.scrollWidth,
+      h: probe.scrollHeight
+    };
+  }
 
   function fitLabel(face) {
     var label = face && face.querySelector(".hero-puzzle__label");
     if (!label) return;
-    var width = face.clientWidth - 8;
-    var height = face.clientHeight - 8;
+    var width = face.clientWidth - 10;
+    var height = face.clientHeight - 10;
     if (width < 4 || height < 4) return;
 
-    var styles = window.getComputedStyle(label);
-    probe.style.fontFamily = styles.fontFamily;
-    probe.style.letterSpacing = styles.letterSpacing;
-    probe.style.width = width + "px";
-    probe.textContent = label.textContent;
+    var text = (label.textContent || "").replace(/\s+/g, " ").trim();
+    var fontFamily = window.getComputedStyle(label).fontFamily;
+    var cap = estimateFont(width, height, text);
+    var lo = 5;
+    var hi = cap;
+    var best = Math.min(6, cap);
 
-    var lo = 6;
-    var hi = Math.max(8, Math.min(width, height) * 0.72);
-    var best = lo;
-
-    for (var i = 0; i < 18; i += 1) {
+    for (var i = 0; i < 16; i += 1) {
       var mid = (lo + hi) / 2;
-      probe.style.fontSize = mid + "px";
-      if (probe.scrollWidth <= width + 0.5 && probe.scrollHeight <= height + 0.5) {
+      var size = measure(text, fontFamily, width, mid);
+      if (size.w <= width + 0.5 && size.h <= height + 0.5) {
         best = mid;
         lo = mid;
       } else {
@@ -54,7 +78,7 @@
       }
     }
 
-    label.style.fontSize = best + "px";
+    label.style.fontSize = Math.min(best, cap) + "px";
   }
 
   function fitAll() {
