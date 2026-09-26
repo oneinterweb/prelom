@@ -41,12 +41,7 @@ layout: default
       {% endunless %}
 
       {% unless page.header.overlay_color or page.header.overlay_image or page.header.image %}
-        {% include post-thumbnail-src.html post=page fallback=false %}
-        {% if thumb_src %}
-          <figure class="page__feature">
-            <img src="{{ thumb_src }}" alt="{{ page.title | escape }}" loading="eager">
-          </figure>
-        {% endif %}
+        {% include post-header-image.html post=page %}
       {% endunless %}
 
       <section class="page__content e-content" itemprop="text">

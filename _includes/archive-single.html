@@ -1,5 +1,4 @@
 {% assign locale = include.locale | default: site.locale %}
-{% include post-thumbnail-src.html post=post %}
 
 {% if post.id %}
   {% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
@@ -9,11 +8,9 @@
 
 <div class="{{ include.type | default: 'list' }}__item">
   <article class="archive__item" itemscope itemtype="https://schema.org/CreativeWork"{% if post.locale %} lang="{{ post.locale }}"{% endif %}>
-    {% if thumb_src %}
-      <div class="archive__item-teaser">
-        <img src="{{ thumb_src }}" alt="" loading="lazy">
-      </div>
-    {% endif %}
+    <div class="archive__item-teaser">
+      {% include post-thumbnail.html post=post %}
+    </div>
     <h2 class="archive__item-title no_toc p-name" itemprop="headline">
       {% if post.link %}
         <a href="{{ post.link }}">{{ title }}</a> <a class="u-url" href="{{ post.url | relative_url }}" rel="permalink"><i class="fas fa-link" aria-hidden="true" title="permalink"></i><span class="sr-only">Permalink</span></a>

@@ -1,0 +1,28 @@
+{% comment %}
+  Single-post header image when a body photo or YouTube frame exists. No speaker fallback.
+{% endcomment %}
+{% if include.post.header.teaser %}
+  <figure class="page__feature">
+    <img src="{{ include.post.header.teaser | relative_url }}" alt="{{ include.post.title | escape }}" loading="eager">
+  </figure>
+{% elsif include.post.header.image %}
+  <figure class="page__feature">
+    <img src="{{ include.post.header.image | relative_url }}" alt="{{ include.post.title | escape }}" loading="eager">
+  </figure>
+{% elsif include.post.content contains 'wp-content/uploads/' %}
+  {% assign feature_parts = include.post.content | split: 'wp-content/uploads/' %}
+  {% assign feature_rest = feature_parts[1] | split: ')' | first | split: '"' | first | split: ' ' | first | split: "'" | first %}
+  {% if feature_rest != blank %}
+    <figure class="page__feature">
+      <img src="{{ '/wp-content/uploads/' | append: feature_rest | relative_url }}" alt="{{ include.post.title | escape }}" loading="eager">
+    </figure>
+  {% endif %}
+{% elsif include.post.content contains 'youtube.com/embed/' %}
+  {% assign feature_yt = include.post.content | split: 'youtube.com/embed/' %}
+  {% assign feature_id = feature_yt[1] | split: '"' | first | split: '?' | first | split: '/' | first %}
+  {% unless feature_id == 'videoseries' or feature_id == blank %}
+    <figure class="page__feature">
+      <img src="https://img.youtube.com/vi/{{ feature_id }}/hqdefault.jpg" alt="{{ include.post.title | escape }}" loading="eager">
+    </figure>
+  {% endunless %}
+{% endif %}
