@@ -1,0 +1,40 @@
+{% comment %}
+  Resolve a listing/header image into `thumb` and `thumb_src`.
+  Pass fallback=false to skip the speaker photo.
+{% endcomment %}
+{% assign thumb = include.post.header.teaser | default: include.post.header.image | default: include.post.header.og_image %}
+{% unless thumb %}
+  {% if include.post.content contains 'wp-content/uploads/' %}
+    {% assign upload_parts = include.post.content | split: 'wp-content/uploads/' %}
+    {% assign upload_rest = upload_parts[1] | split: ')' | first | split: '"' | first | split: ' ' | first | split: "'" | first %}
+    {% if upload_rest != blank %}
+      {% assign thumb = '/wp-content/uploads/' | append: upload_rest %}
+    {% endif %}
+  {% endif %}
+{% endunless %}
+{% unless thumb %}
+  {% if include.post.content contains 'youtube.com/embed/' %}
+    {% assign yt_parts = include.post.content | split: 'youtube.com/embed/' %}
+    {% assign yt_id = yt_parts[1] | split: '"' | first | split: '?' | first | split: '/' | first %}
+    {% unless yt_id == 'videoseries' or yt_id == blank %}
+      {% assign thumb = 'https://img.youtube.com/vi/' | append: yt_id | append: '/hqdefault.jpg' %}
+    {% endunless %}
+  {% endif %}
+{% endunless %}
+{% assign use_fallback = true %}
+{% if include.fallback == false or include.fallback == "false" %}
+  {% assign use_fallback = false %}
+{% endif %}
+{% if thumb == blank and use_fallback %}
+  {% assign thumb = '/assets/images/hero-speaker.jpg' %}
+{% endif %}
+{% if thumb and thumb != blank %}
+  {% if thumb contains '://' %}
+    {% assign thumb_src = thumb %}
+  {% else %}
+    {% assign thumb_src = thumb | relative_url %}
+  {% endif %}
+{% else %}
+  {% assign thumb = nil %}
+  {% assign thumb_src = nil %}
+{% endif %}
