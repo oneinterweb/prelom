@@ -37,6 +37,9 @@ search_provider: lunr
 comments:
   provider: false
 
+# Google Tag Manager — head script + body noscript on every page.
+gtm_container_id: "GTM-T5SF3STS"
+
 # Homepage puzzle uses the N most-used tags, recomputed on each build.
 hero_puzzle_tag_limit: 30
 
