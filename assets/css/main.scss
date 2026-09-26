@@ -568,7 +568,12 @@
 .page__author .author__content,
 .page__author .author__urls-wrapper {
   display: block;
+  width: auto;
   padding: 0;
+}
+
+.page__author .author__content {
+  flex: 1 1 auto;
 }
 
 .page__author .author__avatar img {
