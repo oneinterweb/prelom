@@ -642,12 +642,15 @@
 }
 
 .page__feature {
+  display: block;
+  width: 100%;
   margin: 0 0 1.35rem;
 }
 
 .page__feature img {
   display: block;
   width: 100%;
+  height: auto;
   max-height: 22rem;
   object-fit: cover;
   border-radius: 4px;
