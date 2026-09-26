@@ -37,6 +37,9 @@ search_provider: lunr
 comments:
   provider: false
 
+# GA4 site tag loaded in <head> via _includes/head/custom.html
+google_analytics_id: "G-E5BVR3KB28"
+
 # Homepage puzzle uses the N most-used tags, recomputed on each build.
 hero_puzzle_tag_limit: 30
 
