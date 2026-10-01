@@ -1,0 +1,40 @@
+{% assign locale = include.locale | default: site.locale %}
+{% assign lang = locale | slice: 0, 2 | default: "en" %}
+{% if lang == "gr" %}
+  {% assign lang = "gr" %}
+{% else %}
+  {% assign lang = "en" %}
+{% endif %}
+{% assign lunr_core = '/assets/js/lunr/lunr.min.js' | relative_url %}
+{% assign lunr_store = '/assets/js/lunr/lunr-store.js' | relative_url %}
+{% assign lunr_lang = '/assets/js/lunr/lunr-' | append: lang | append: '.js' | relative_url %}
+{% if page.layout == "search" %}
+<script src="{{ lunr_core }}"></script>
+<script src="{{ lunr_store }}"></script>
+<script src="{{ lunr_lang }}"></script>
+{% else %}
+<script>
+(function () {
+  var loaded = false;
+  var urls = ["{{ lunr_core }}", "{{ lunr_store }}", "{{ lunr_lang }}"];
+  function loadLunr() {
+    if (loaded) return;
+    loaded = true;
+    urls.reduce(function (chain, url) {
+      return chain.then(function () {
+        return new Promise(function (resolve, reject) {
+          var s = document.createElement("script");
+          s.src = url;
+          s.onload = resolve;
+          s.onerror = reject;
+          document.body.appendChild(s);
+        });
+      });
+    }, Promise.resolve());
+  }
+  document.addEventListener("click", function (event) {
+    if (event.target.closest && event.target.closest(".search__toggle")) loadLunr();
+  }, true);
+})();
+</script>
+{% endif %}

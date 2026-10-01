@@ -71,7 +71,7 @@ excerpt: "Кратко резюме за списъка и SEO."
 | deal.ai чат уиджет | Пропуснат |
 | YouTube, Rumble, Vimeo, Facebook, sermon.net, Adobe Spark, Typeform | Запазени като iframe |
 | PayPal (`/donate/`) и Mailchimp (`/newsletter/`) | Статични форми |
-| Начална CRM форма | `threefold.life/crm/form/generate.js?id=36` |
+| Начална CRM форма | Премахната (мъртъв `threefold.life` скрипт) |
 | `/category/<slug>/` и `/tag/<slug>/` | Статични архиви |
 
 ## Какво трябва да направи собственикът

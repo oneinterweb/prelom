@@ -1,0 +1,36 @@
+{% assign locale = include.locale | default: site.locale %}
+<meta charset="utf-8">
+
+{% include seo.html locale=locale %}
+
+{% unless site.atom_feed.hide %}
+  <link href="{% if site.atom_feed.path %}{{ site.atom_feed.path }}{% else %}{{ '/feed.xml' | relative_url }}{% endif %}" type="application/atom+xml" rel="alternate" title="{{ site.title }} Feed">
+{% endunless %}
+
+{%- comment %} https://docs.google.com/presentation/d/1rmxwWa9P6_xHqonmh5ONXRS-jPc5XKbnv99Rjkhe04s/present {% endcomment -%}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+  document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
+  {% if site.enable_copy_code_button -%}
+    window.enable_copy_code_button = true;
+  {%- endif %}
+</script>
+
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+{% if page.url == "/" %}
+<link
+  rel="preload"
+  as="image"
+  type="image/webp"
+  fetchpriority="high"
+  imagesrcset="{{ '/assets/images/hero-speaker-800.webp' | relative_url }} 800w, {{ '/assets/images/hero-speaker-1200.webp' | relative_url }} 1200w, {{ '/assets/images/hero-speaker-1600.webp' | relative_url }} 1600w"
+  imagesizes="(max-width: 1180px) 100vw, 1180px"
+>
+{% endif %}
+
+{% if site.head_scripts %}
+  {% for script in site.head_scripts %}
+    <script src="{{ script | relative_url }}"></script>
+  {% endfor %}
+{% endif %}

@@ -1,16 +1,24 @@
-{% assign puzzle_src = '/assets/images/hero-speaker.jpg' | relative_url %}
 {% assign puzzle_limit = site.hero_puzzle_tag_limit | default: 30 %}
 {% capture ranked_blob %}{% for tag in site.tags %}{{ tag[1].size | plus: 100000 }}::{{ tag[0] }}{% unless forloop.last %}##{% endunless %}{% endfor %}{% endcapture %}
 {% assign ranked = ranked_blob | split: "##" | sort | reverse %}
 <section class="hero-puzzle" aria-label="Герой с етикети">
   <div class="hero-puzzle__frame">
-    <img
-      class="hero-puzzle__photo"
-      src="{{ puzzle_src }}"
-      alt="Георги Бакалов говори с микрофон"
-      width="1920"
-      height="1080"
-    >
+    <picture>
+      <source
+        type="image/webp"
+        srcset="{{ '/assets/images/hero-speaker-800.webp' | relative_url }} 800w, {{ '/assets/images/hero-speaker-1200.webp' | relative_url }} 1200w, {{ '/assets/images/hero-speaker-1600.webp' | relative_url }} 1600w"
+        sizes="(max-width: 1180px) 100vw, 1180px"
+      >
+      <img
+        class="hero-puzzle__photo"
+        src="{{ '/assets/images/hero-speaker.jpg' | relative_url }}"
+        alt="Георги Бакалов говори с микрофон"
+        width="1920"
+        height="1080"
+        fetchpriority="high"
+        decoding="async"
+      >
+    </picture>
     <div class="hero-puzzle__board">
       {%- for item in ranked limit: puzzle_limit -%}
         {%- assign tname = item | split: "::" | last -%}

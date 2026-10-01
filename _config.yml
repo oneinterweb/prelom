@@ -23,6 +23,8 @@ kramdown:
   hard_wrap: false
   parse_block_html: false
 highlighter: rouge
+sass:
+  style: compressed
 lsi: false
 excerpt_separator: "<!--more-->"
 incremental: false
