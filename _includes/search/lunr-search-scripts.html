@@ -15,12 +15,11 @@
 {% else %}
 <script>
 (function () {
-  var loaded = false;
+  var loading = null;
   var urls = ["{{ lunr_core }}", "{{ lunr_store }}", "{{ lunr_lang }}"];
   function loadLunr() {
-    if (loaded) return;
-    loaded = true;
-    urls.reduce(function (chain, url) {
+    if (loading) return loading;
+    loading = urls.reduce(function (chain, url) {
       return chain.then(function () {
         return new Promise(function (resolve, reject) {
           var s = document.createElement("script");
@@ -30,8 +29,17 @@
           document.body.appendChild(s);
         });
       });
-    }, Promise.resolve());
+    }, Promise.resolve()).then(function () {
+      var input = document.getElementById("search");
+      if (input && input.value) {
+        input.dispatchEvent(new Event("keyup"));
+      }
+    });
+    return loading;
   }
+  document.addEventListener("pointerdown", function (event) {
+    if (event.target.closest && event.target.closest(".search__toggle")) loadLunr();
+  }, true);
   document.addEventListener("click", function (event) {
     if (event.target.closest && event.target.closest(".search__toggle")) loadLunr();
   }, true);
